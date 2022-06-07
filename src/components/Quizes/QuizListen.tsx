@@ -164,7 +164,11 @@ export default function QuizListen({
       </Card.Title>
       <Form onSubmit={handleEnterWord} ref={wordForm}>
         <InputGroup>
-          <FormControl className={inputClasses.join(' ')} id="answer" />
+          <FormControl
+            className={inputClasses.join(' ')}
+            id="answer"
+            autoComplete="off"
+          />
           {allowNext ? (
             <Button variant="primary" onClick={handleNextWord}>
               <ArrowRight />
