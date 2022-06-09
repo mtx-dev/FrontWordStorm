@@ -91,7 +91,7 @@ const words: IWord[] = [
     lastSuccessful: null,
     attempts: 0,
     successfulAttempts: 0,
-    active: false,
+    active: true,
   },
   {
     id: '10',
@@ -101,7 +101,7 @@ const words: IWord[] = [
     lastSuccessful: null,
     attempts: 0,
     successfulAttempts: 0,
-    active: false,
+    active: true,
   },
   {
     id: '11',
@@ -111,7 +111,7 @@ const words: IWord[] = [
     lastSuccessful: null,
     attempts: 0,
     successfulAttempts: 0,
-    active: false,
+    active: true,
   },
   {
     id: '12',
@@ -121,7 +121,7 @@ const words: IWord[] = [
     lastSuccessful: null,
     attempts: 0,
     successfulAttempts: 0,
-    active: false,
+    active: true,
   },
   {
     id: '13',
@@ -131,7 +131,7 @@ const words: IWord[] = [
     lastSuccessful: null,
     attempts: 0,
     successfulAttempts: 0,
-    active: false,
+    active: true,
   },
   {
     id: '14',
@@ -141,7 +141,7 @@ const words: IWord[] = [
     lastSuccessful: null,
     attempts: 0,
     successfulAttempts: 0,
-    active: false,
+    active: true,
   },
   {
     id: '15',
@@ -151,7 +151,7 @@ const words: IWord[] = [
     lastSuccessful: null,
     attempts: 0,
     successfulAttempts: 0,
-    active: false,
+    active: true,
   },
   {
     id: '16',
@@ -161,7 +161,7 @@ const words: IWord[] = [
     lastSuccessful: null,
     attempts: 0,
     successfulAttempts: 0,
-    active: false,
+    active: true,
   },
   {
     id: '17',
@@ -171,7 +171,7 @@ const words: IWord[] = [
     lastSuccessful: null,
     attempts: 0,
     successfulAttempts: 0,
-    active: false,
+    active: true,
   },
   {
     id: '18',
@@ -181,7 +181,7 @@ const words: IWord[] = [
     lastSuccessful: null,
     attempts: 0,
     successfulAttempts: 0,
-    active: false,
+    active: true,
   },
   {
     id: '19',
@@ -191,7 +191,7 @@ const words: IWord[] = [
     lastSuccessful: null,
     attempts: 0,
     successfulAttempts: 0,
-    active: false,
+    active: true,
   },
   {
     id: '20',
@@ -201,7 +201,7 @@ const words: IWord[] = [
     lastSuccessful: null,
     attempts: 0,
     successfulAttempts: 0,
-    active: false,
+    active: true,
   },
   {
     id: '21',
@@ -211,7 +211,7 @@ const words: IWord[] = [
     lastSuccessful: null,
     attempts: 0,
     successfulAttempts: 0,
-    active: false,
+    active: true,
   },
   {
     id: '22',
@@ -221,7 +221,7 @@ const words: IWord[] = [
     lastSuccessful: null,
     attempts: 0,
     successfulAttempts: 0,
-    active: false,
+    active: true,
   },
   {
     id: '23',
@@ -231,7 +231,7 @@ const words: IWord[] = [
     lastSuccessful: null,
     attempts: 0,
     successfulAttempts: 0,
-    active: false,
+    active: true,
   },
 ];
 
