@@ -35,9 +35,18 @@ html {
 }
 
 @media screen and (max-width: 500px) {
-  .quiz-card {
-    height: max(calc(100vh - 56px), 400px) !important;
+  .quiz-card-outside {
+    flex-grow: 1;
+    background: #101316;
   }
+}
+
+.word-fail {
+  color: #56607c;
+  list-style-type: none;
+}
+.word-success {
+  color: #61dafb;
 }
 
 .letter-item {
