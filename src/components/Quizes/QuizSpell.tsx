@@ -52,8 +52,7 @@ export default function QuizSpell({
     if (isNaN(choosenLetterIndex)) return;
 
     setClickedIndex(choosenLetterIndex);
-    // console.log('let', pazzleList[choosenLetterIndex]);
-    // console.log('chek', pazzleList[choosenLetterIndex] === currentRightLetter);
+
     const isLetterCorrect =
       pazzleList[choosenLetterIndex] === currentRightLetter;
     if (isLetterCorrect) {
@@ -78,7 +77,7 @@ export default function QuizSpell({
 
   return (
     <QuizCard
-      title="Translate to English"
+      title="Spell"
       pazzle={pazzleWord.translation}
       disabledNext={!allowNext}
       handleNextWord={handleNextWord}
