@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import EndCard from '../common/layout/quizCard/EndCard';
 import useAsyncEffect from '../hoocks/useAsyncEffect';
 import useQuizes from '../hoocks/useQuizes';
 import useStatistic from '../hoocks/useStatistic';
@@ -28,12 +29,12 @@ export default function ScudSection() {
   const [currentQuizIndex, setCurrentQuizIndex] = useState(0);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [isFinish, setIsFinish] = useState(false);
-  const [statstic, setStatistic] = useState(defaultStatistic);
+  const [statistic, setStatistic] = useState(defaultStatistic);
 
   const handleNext = (result: boolean) => {
     const wordId = pazzleWords[currentWordIndex].id;
-    if (statstic[wordId]) {
-      const newResults = { ...statstic };
+    if (statistic[wordId]) {
+      const newResults = { ...statistic };
       newResults[wordId] = result;
       setStatistic(newResults);
     }
@@ -57,13 +58,13 @@ export default function ScudSection() {
     if (!isFinish) return;
     const updatedWords = words.map((word) => {
       word.attempts += 1;
-      if (statstic[word.id]) {
+      if (statistic[word.id]) {
         word.successfulAttempts += 1;
         word.lastSuccessful = new Date();
       }
       return word;
     });
-    await saveStatistic(updatedWords);
+    // await saveStatistic(updatedWords);
     setIsFinish(false);
     setStatus(Status.End);
   }, [isFinish]);
@@ -80,14 +81,7 @@ export default function ScudSection() {
       );
     // return <StartCard onClick={()=>{}/>
     case Status.End:
-      return (
-        <CurrentQuiz
-          key={pazzleWords[currentWordIndex].word}
-          pazzleWord={pazzleWords[currentWordIndex]}
-          next={handleNext}
-        />
-      );
-    // return <EndCard onClick={()=>{}}/>
+      return <EndCard statistic={statistic} pazzleWords={pazzleWords} />;
     default:
       return (
         <CurrentQuiz
