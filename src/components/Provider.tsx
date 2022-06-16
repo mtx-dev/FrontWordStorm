@@ -13,11 +13,12 @@ const u = {
   isActivated: true,
   settings: {
     quizes: ['Translate', 'ReverseTranslate', 'Listen', 'Spell'],
+    voice: '3',
   },
 };
 
 export default function Provider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<IUser>({} as IUser);
+  const [user, setUser] = useState<IUser>(null);
   const [vocabulary, setVocabulary] = useState<IWord[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isAuth, setIsAuth] = useState<boolean>(false);
@@ -121,7 +122,6 @@ export default function Provider({ children }: { children: React.ReactNode }) {
         active: true,
       };
       const newVocabulary = [data, ...vocabulary];
-      // console.log(newVocabulary);
       setVocabulary(newVocabulary);
     } catch (error: any) {
       console.log(error.response?.data?.message);
@@ -133,14 +133,20 @@ export default function Provider({ children }: { children: React.ReactNode }) {
       const newVocabulary = [...vocabulary];
       const wordIndex = newVocabulary.findIndex((item) => item.id === id);
       newVocabulary[wordIndex].active = active;
-      // const word = newVocabulary[wordIndex];
+      // const word = newVocabulary[worupdateUserdIndex];
       // await VocabularyServoce.updateWord({...word, active})
 
-      // console.log(newVocabulary);
       setVocabulary(newVocabulary);
     } catch (error: any) {
       console.log(error.response?.data?.message);
     }
+  };
+  const setVoice = (voiceIndex: string) => {
+    if (!user) return;
+    const updateUser = { ...user };
+    updateUser.settings.voice = voiceIndex;
+    console.log('set voiceIndex', voiceIndex);
+    setUser(updateUser);
   };
 
   const value: StoreContextType = {
@@ -155,6 +161,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
     getVocabulary,
     addWord,
     setWordActive,
+    setVoice,
   };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;

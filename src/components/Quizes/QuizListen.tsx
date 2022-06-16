@@ -12,6 +12,7 @@ import { ArrowRight } from 'react-bootstrap-icons';
 import useAsyncEffect from '../../hoocks/useAsyncEffect';
 import { IQuizProps } from '../../models/IQuiz';
 import { splitByWords } from '../../utils/wordUtils';
+import useSettings from '../../hoocks/useSettings';
 
 enum Playback {
   Pending = 'Pending',
@@ -55,6 +56,8 @@ export default function QuizListen({
   next,
 }: IQuizProps): JSX.Element {
   const inputClasses = ['text-light', 'bg-dark', 'border'];
+  const { settings } = useSettings();
+  console.log('settings', settings.voice);
   const wordForm = useRef<HTMLFormElement>();
   const [playback, setPlaybak] = useState<Playback>(Playback.Play);
   const [hasVoice, setHasVioce] = useState<boolean>(false);
@@ -72,9 +75,6 @@ export default function QuizListen({
   speech.onend = onEnd;
 
   const splitedPazzle = splitByWords(pazzleWord.word);
-  // const [isAnswerCorrect, setIsAnswerCorrect] = useState<boolean>();
-  // console.log(allowNext, isAnswerRight);
-  // console.log(speech);
   inputClasses.push(
     !allowNext
       ? 'border-secondary'
@@ -86,9 +86,7 @@ export default function QuizListen({
   useAsyncEffect(async () => {
     const voicesTry = speechSynth.getVoices();
     const voices = voicesTry.length ? voicesTry : await getVoices();
-    // console.log('voices', voices);
-    const voice = voices[93] ? voices[93] : voices[3];
-    // console.log(voice);
+    const voice = voices[Number(settings.voice)];
     if (voice) {
       setHasVioce(true);
       setVoice(voice);
@@ -150,7 +148,7 @@ export default function QuizListen({
   return (
     <QuizCard
       title="Listen and write"
-      // pazzle={pazzleWord.translation}
+      pazzle={allowNext ? pazzleWord.translation : ''}
       disabledNext={!allowNext}
       handleNextWord={handleNextWord}
     >
