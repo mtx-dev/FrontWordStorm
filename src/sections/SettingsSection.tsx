@@ -35,22 +35,30 @@ export default function SettingsSection() {
   return (
     <Row className="justify-content-center">
       <Col xs={10} sm={8} md={6}>
-        SettingsSection
-        <h2>voices</h2>
-        <Form.Select value={currentVoice} onChange={handleChange}>
-          {voices.map((v, index) => (
-            <option key={index} value={index}>
-              {v?.name}
-            </option>
-          ))}
-        </Form.Select>
-        <Button
-          className="mt-4"
-          onClick={handleSave}
-          disabled={currentVoice === settings.voice}
-        >
-          Save
-        </Button>
+        <h2 className="mt-4">Settings</h2>
+        <Form className="mt-4">
+          <Form.Group controlId="soundOn" className="mb-4">
+            <Form.Check type="switch" id="soundOn" label="Quizes with sound" />
+          </Form.Group>
+          <Form.Group controlId="formVoice">
+            <Form.Label>Voice</Form.Label>
+            <Form.Select value={currentVoice} onChange={handleChange}>
+              {voices.map((v, index) => (
+                <option key={index} value={index}>
+                  {v?.name}
+                </option>
+              ))}
+            </Form.Select>
+          </Form.Group>
+          <Button
+            className="mt-4"
+            onClick={handleSave}
+            disabled={currentVoice === settings.voice}
+            type="submit"
+          >
+            Save
+          </Button>
+        </Form>
       </Col>
     </Row>
   );
