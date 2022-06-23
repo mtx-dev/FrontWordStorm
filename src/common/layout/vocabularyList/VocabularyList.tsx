@@ -10,7 +10,13 @@ export default function VocabularyList({
   wordsList: IWord[];
   onChangeActive: (id: IWord['id'], active: boolean) => void;
 }) {
-  const buildList = wordsList.map((wordItem) => {
+  // TODO Rework sort on some contition
+  const sorted = wordsList.sort((a, b) => {
+    if (a.active && b.active) return 0;
+    if (a.active && !b.active) return -1;
+    return 1;
+  });
+  const buildList = sorted.map((wordItem) => {
     return (
       <VocabularyItem
         key={wordItem.word}
