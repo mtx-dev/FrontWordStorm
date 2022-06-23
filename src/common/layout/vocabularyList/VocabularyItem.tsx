@@ -39,7 +39,7 @@ export default function VocabularyItem({
   return (
     <ListGroup.Item className={itemClasses.join(' ')}>
       <Row className="align-items-center">
-        <Col xs={8}>
+        <Col xs={7}>
           <Row className="align-items-center justify-content-end">
             <Col sm={6} className="fs-5">
               {wordItem.word}
@@ -47,7 +47,7 @@ export default function VocabularyItem({
             <Col sm={6}>{wordItem.translation}</Col>
           </Row>
         </Col>
-        <Col xs={4}>
+        <Col xs={5}>
           <Row className="align-items-center justify-content-end">
             <Col xs="auto">{status}</Col>
             <Col xs="auto">
