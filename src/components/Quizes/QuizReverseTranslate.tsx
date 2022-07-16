@@ -25,12 +25,12 @@ export default function QuizReverseTranslate({
     }
   }, [choosenWord]);
 
-  useAsyncEffect(() => {
+  useAsyncEffect(async () => {
     // TODO rework to just words array
-    const fakeWords = DictionaryServoce.getFakeTranslationWords(
-      pazzleWord.word,
-    ).map((item) => item.translations[0]);
-    const resultList = [...fakeWords];
+    const fakeWords = await DictionaryServoce.getFakeTranslationWords(
+      pazzleWord.translation,
+    );
+    const resultList = [...fakeWords.map((item) => item.word)];
     const rightAnswerIndex = randomIndex(MAX_WORDS_VARIANTS - 1);
     resultList.splice(rightAnswerIndex, 0, pazzleWord.translation);
     setPazzleList(resultList);
