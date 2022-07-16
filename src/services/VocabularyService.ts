@@ -236,25 +236,31 @@ const words: IWord[] = [
 ];
 
 export default class VocabularyService {
-  static async getVocabulary(): Promise<any> {
-    return { data: words };
-  }
-  // static async getVocabulary(): Promise<AxiosResponse<IWord[]>> {
-  //     return api.get<IWord[]>('/vocabulary');
+  // static async getVocabulary(): Promise<any> {
+  //   return { data: words };
   // }
+  static async getVocabulary(): Promise<AxiosResponse<IWord[]>> {
+    return api.get<IWord[]>('/vocabulary');
+  }
 
   static async addWord(
     word: string,
-    transaltion: string,
+    translation: string,
   ): Promise<AxiosResponse<IWord>> {
-    return api.post<IWord>('/vocabulary/add', { word, transaltion });
+    return api.post<IWord>('/vocabulary', { word, translation });
   }
 
-  static async updateWord(word: IWord): Promise<AxiosResponse<IWord>> {
+  static async deleteWord(id: string): Promise<AxiosResponse<IWord>> {
+    return api.delete<IWord, AxiosResponse<IWord>>('/vocabulary', {
+      id,
+    } as any);
+  }
+
+  static async updateWord(word: Partial<IWord>): Promise<AxiosResponse<IWord>> {
     return api.patch<IWord>('/vocabulary/update', { word });
   }
 
-  static async updateWords(words: IWord[]): Promise<AxiosResponse<IWord[]>> {
-    return api.put<IWord[]>('/vocabulary/updates', { words });
+  static async updateWords(words: Partial<IWord>[]): Promise<AxiosResponse> {
+    return api.patch('/vocabulary/updates', { words });
   }
 }
