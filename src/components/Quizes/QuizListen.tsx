@@ -57,7 +57,6 @@ export default function QuizListen({
 }: IQuizProps): JSX.Element {
   const inputClasses = ['text-light', 'bg-dark', 'border'];
   const { settings } = useSettings();
-  console.log('settings', settings.voice);
   const wordForm = useRef<HTMLFormElement>();
   const [playback, setPlaybak] = useState<Playback>(Playback.Play);
   const [hasVoice, setHasVioce] = useState<boolean>(false);

@@ -35,6 +35,7 @@ export default function VocabularySection() {
       const filtered = !str
         ? vocabulary
         : vocabulary.filter((item) => item.word.includes(str));
+
       setFiltredVocabularyList(filtered);
     },
     [vocabulary],
