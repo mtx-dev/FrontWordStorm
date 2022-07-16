@@ -6,14 +6,21 @@ import { IUser } from '../models/IUser';
 import { IWord } from '../models/IWord';
 import { StoreContextType } from '../context/Context';
 import VocabularyServoce from '../services/VocabularyService';
+import { QuizNameType } from '../hoocks/useQuizes';
 
 const u = {
-  id: 'idetrid',
-  email: 'ggg@gg@.com',
-  isActivated: true,
   settings: {
-    quizes: ['Translate', 'ReverseTranslate', 'Listen', 'Spell'],
+    // quizes: ['Listen'] as QuizNameType[],
+    quizes: [
+      'Translate',
+      'ReverseTranslate',
+      'Listen',
+      'Spell',
+    ] as QuizNameType[],
     voice: '3',
+    allowVioce: true,
+
+    allowedQuizes: ['Translate', 'ReverseTranslate', 'Listen', 'Spell'],
   },
 };
 
@@ -28,9 +35,11 @@ export default function Provider({ children }: { children: React.ReactNode }) {
     try {
       // TODO Add error connection
       const response = await AuthService.refresh();
+      console.log('refresh', response);
       localStorage.setItem('token', response.data.accessToken);
       setIsAuth(true);
-      setUser(response.data.user);
+      setUser({ ...response.data.user, settings: u.settings });
+      await getVocabulary();
     } catch (error: any) {
       console.log(error.response?.data?.message);
     } finally {
@@ -45,14 +54,17 @@ export default function Provider({ children }: { children: React.ReactNode }) {
   ) => {
     try {
       // TODO Add error connection
-      // const response = await AuthService.login(email, password);
-      // localStorage.setItem('token', response.data.accessToken);
+      const response = await AuthService.login(email, password);
+      localStorage.setItem('token', response.data.accessToken);
       setIsAuth(true);
-      console.log('set user');
-      setUser(u as IUser);
-      console.log(u);
-      // setUser(response.data.user);
+      console.log('set user', response.data.user);
+      setUser({ ...response.data.user, settings: u.settings });
       await getVocabulary();
+      // const w = vocabulary[0];
+      // w.active = false;
+      // w.attempts = 5;
+      // const res = await VocabularyServoce.updateWord(w);
+      // console.log('>>>>>>>rez', res);
       callback();
     } catch (error: any) {
       console.log(error.response?.data?.message);
@@ -90,19 +102,29 @@ export default function Provider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  useAsyncEffect(() => {
-    if (localStorage.getItem('token')) checkAuth();
+  useAsyncEffect(async () => {
+    if (localStorage.getItem('token')) await checkAuth();
   }, []);
 
-  const saveStatistic = async (words: IWord[]) => {
-    await VocabularyServoce.updateWords(words);
+  const saveStatistic = async (wordsStatistic: Partial<IWord>[]) => {
+    const r = await VocabularyServoce.updateWords(wordsStatistic);
+    console.log(r);
+  };
+  // TODO move to utils
+  const sortVocabulary = (voc: IWord[]) => {
+    const sorted = [...voc];
+    return sorted.sort((a, b) => {
+      if (a.active && b.active) return 0;
+      if (a.active && !b.active) return -1;
+      return 1;
+    });
   };
 
   const getVocabulary = async () => {
     try {
-      // setVocabulary(words);
       const response = await VocabularyServoce.getVocabulary();
-      setVocabulary(response.data);
+      console.log('Get voc', response.data);
+      setVocabulary(sortVocabulary(response.data));
     } catch (error: any) {
       console.log(error.response?.data?.message);
     }
@@ -110,18 +132,9 @@ export default function Provider({ children }: { children: React.ReactNode }) {
 
   const addWord = async (word: string, translation: string) => {
     try {
-      // const response = await VocabularyServoce.addWord(word, translation);
-      const data: IWord = {
-        id: String(vocabulary.length),
-        word,
-        translation,
-        status: 'study',
-        lastSuccessful: null,
-        attempts: 0,
-        successfulAttempts: 0,
-        active: true,
-      };
-      const newVocabulary = [data, ...vocabulary];
+      const response = await VocabularyServoce.addWord(word, translation);
+      console.log('new', response.data);
+      const newVocabulary = [...vocabulary, response.data];
       setVocabulary(newVocabulary);
     } catch (error: any) {
       console.log(error.response?.data?.message);
@@ -133,14 +146,14 @@ export default function Provider({ children }: { children: React.ReactNode }) {
       const newVocabulary = [...vocabulary];
       const wordIndex = newVocabulary.findIndex((item) => item.id === id);
       newVocabulary[wordIndex].active = active;
-      // const word = newVocabulary[worupdateUserdIndex];
-      // await VocabularyServoce.updateWord({...word, active})
+      await VocabularyServoce.updateWord({ id, active });
 
       setVocabulary(newVocabulary);
     } catch (error: any) {
       console.log(error.response?.data?.message);
     }
   };
+
   const setVoice = (voiceIndex: string) => {
     if (!user) return;
     const updateUser = { ...user };
