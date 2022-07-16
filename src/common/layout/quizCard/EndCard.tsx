@@ -24,11 +24,11 @@ const EndCard = ({
             <Card.Title className="p-2 text-light d-flex justify-content-center">
               Results
             </Card.Title>
-            <ul>
+            <ul className="h5">
               {pazzleWords.map((item, index) => (
                 <li
                   key={index}
-                  className={statistic[index] ? 'word-success' : 'word-fail'}
+                  className={statistic[item.id] ? 'word-success' : 'word-fail'}
                 >
                   {item.word}
                 </li>
