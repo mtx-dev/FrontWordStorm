@@ -18,7 +18,6 @@ export default function ScudSection() {
   const { vocabulary } = useVocabulary();
   const words = filterToStudy(vocabulary);
   const quizes = useQuizes();
-  console.log('quizes', quizes);
   const { saveStatistic } = useStatistic();
   const defaultStatistic = words.reduce((result, word) => {
     result[word.id] = true;
