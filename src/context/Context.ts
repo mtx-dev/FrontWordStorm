@@ -19,6 +19,7 @@ export type SetWordActiveFunc = (
 export interface StoreContextType {
   isLoading: boolean;
   isAuth: boolean;
+  isAuthChecked: boolean;
   user: IUser;
   login: AuthInFunc;
   registration: AuthInFunc;

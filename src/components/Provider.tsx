@@ -6,29 +6,13 @@ import { IUser } from '../models/IUser';
 import { IWord } from '../models/IWord';
 import { StoreContextType } from '../context/Context';
 import VocabularyServoce from '../services/VocabularyService';
-import { QuizNameType } from '../hoocks/useQuizes';
-
-const u = {
-  settings: {
-    // quizes: ['Listen'] as QuizNameType[],
-    quizes: [
-      'Translate',
-      'ReverseTranslate',
-      'Listen',
-      'Spell',
-    ] as QuizNameType[],
-    voice: '3',
-    allowVioce: true,
-
-    allowedQuizes: ['Translate', 'ReverseTranslate', 'Listen', 'Spell'],
-  },
-};
 
 export default function Provider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<IUser>(null);
   const [vocabulary, setVocabulary] = useState<IWord[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isAuth, setIsAuth] = useState<boolean>(false);
+  const [isAuthChecked, setIsAuthChecked] = useState<boolean>(false);
 
   const checkAuth = async () => {
     setIsLoading(true);
@@ -37,14 +21,14 @@ export default function Provider({ children }: { children: React.ReactNode }) {
       const response = await AuthService.refresh();
       console.log('refresh', response);
       localStorage.setItem('token', response.data.accessToken);
-      setIsAuth(true);
-      setUser({ ...response.data.user, settings: u.settings });
+      setUser({ ...response.data.user });
       await getVocabulary();
+      setIsAuth(true);
     } catch (error: any) {
       console.log(error.response?.data?.message);
-    } finally {
-      setIsLoading(false);
     }
+    setIsLoading(false);
+    setIsAuthChecked(true);
   };
 
   const login = async (
@@ -56,15 +40,10 @@ export default function Provider({ children }: { children: React.ReactNode }) {
       // TODO Add error connection
       const response = await AuthService.login(email, password);
       localStorage.setItem('token', response.data.accessToken);
-      setIsAuth(true);
       console.log('set user', response.data.user);
-      setUser({ ...response.data.user, settings: u.settings });
+      setUser({ ...response.data.user });
       await getVocabulary();
-      // const w = vocabulary[0];
-      // w.active = false;
-      // w.attempts = 5;
-      // const res = await VocabularyServoce.updateWord(w);
-      // console.log('>>>>>>>rez', res);
+      setIsAuth(true);
       callback();
     } catch (error: any) {
       console.log(error.response?.data?.message);
@@ -165,6 +144,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
   const value: StoreContextType = {
     isLoading,
     isAuth,
+    isAuthChecked,
     user,
     login,
     logout,
