@@ -47,8 +47,6 @@ export default function LoginSection() {
     }
   };
 
-  const [show, setShow] = useState(true);
-
   return (
     <Container className="bg-transparent">
       <Row className="text-white-50 justify-content-md-center mt-3">
