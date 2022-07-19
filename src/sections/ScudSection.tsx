@@ -61,8 +61,10 @@ export default function ScudSection() {
       word.attempts += 1;
       if (statistic[word.id]) {
         word.successfulAttempts += 1;
-        // TODO Fix time format
         word.lastSuccessful = new Date();
+      }
+      if (word.successfulAttempts === 5) {
+        word.status = 'learned';
       }
       return {
         id: word.id,
