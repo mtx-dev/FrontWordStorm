@@ -94,7 +94,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
     const sorted = [...voc];
     return sorted.sort((a, b) => {
       if (a.active && b.active) return 0;
-      if (a.active && !b.active) return -1;
+      if ((a.active && !b.active) || b.status === 'learned') return -1;
       return 1;
     });
   };
