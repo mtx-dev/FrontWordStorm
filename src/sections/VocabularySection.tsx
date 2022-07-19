@@ -58,7 +58,6 @@ export default function VocabularySection() {
   const handleDictionaryChoice = (id: IWord['id']) => {
     const choosed = filtredDictionaryList.find((item) => item.id === id);
     setTranslation(choosed.translations[0]);
-    setIsChoosen(true);
   };
 
   const handleAddToggle = useCallback(() => {
