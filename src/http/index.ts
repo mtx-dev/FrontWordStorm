@@ -1,11 +1,9 @@
 import axios from 'axios';
 import AuthService from '../services/AuthServoce';
 
-export const API_URL = 'http://localhost:5000/api';
-
 const api = axios.create({
   withCredentials: true,
-  baseURL: API_URL,
+  baseURL: process.env.REACT_APP_API_URL,
 });
 
 api.interceptors.request.use((config) => {
