@@ -6,6 +6,7 @@ import { IUser } from '../models/IUser';
 import { IWord } from '../models/IWord';
 import { StoreContextType } from '../context/Context';
 import VocabularyServoce from '../services/VocabularyService';
+import { useErrorHandling } from '../hoocks/useErrorHandling';
 
 export default function Provider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<IUser>(null);
@@ -13,6 +14,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isAuth, setIsAuth] = useState<boolean>(false);
   const [isAuthChecked, setIsAuthChecked] = useState<boolean>(false);
+  const { triggerError } = useErrorHandling();
 
   const checkAuth = async () => {
     setIsLoading(true);
@@ -25,7 +27,8 @@ export default function Provider({ children }: { children: React.ReactNode }) {
       await getVocabulary();
       setIsAuth(true);
     } catch (error: any) {
-      console.log(error.response?.data?.message);
+      console.log('checkAuth', error.response?.data?.message);
+      triggerError(error);
     }
     setIsLoading(false);
     setIsAuthChecked(true);
@@ -47,6 +50,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
       callback();
     } catch (error: any) {
       console.log(error.response?.data?.message);
+      triggerError(error);
     }
   };
 
@@ -64,6 +68,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
       callback();
     } catch (error: any) {
       console.log(error.response?.data?.message);
+      triggerError(error);
     }
   };
 
@@ -78,6 +83,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
       callback();
     } catch (error: any) {
       console.log(error.response?.data?.message);
+      triggerError(error);
     }
   };
 
@@ -106,6 +112,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
       setVocabulary(sortVocabulary(response.data));
     } catch (error: any) {
       console.log(error.response?.data?.message);
+      triggerError(error);
     }
   };
 
@@ -117,6 +124,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
       setVocabulary(newVocabulary);
     } catch (error: any) {
       console.log(error.response?.data?.message);
+      triggerError(error);
     }
   };
 
@@ -130,6 +138,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
       setVocabulary(newVocabulary);
     } catch (error: any) {
       console.log(error.response?.data?.message);
+      triggerError(error);
     }
   };
 
