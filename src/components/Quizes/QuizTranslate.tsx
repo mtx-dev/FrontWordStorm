@@ -63,7 +63,7 @@ export default function QuizTranslate({
     />
   ));
   const pazzle =
-    pazzleWord.translation + (pazzleWord.note ? `[${pazzleWord.note}]` : '');
+    pazzleWord.translation + (pazzleWord.note ? `  [${pazzleWord.note}]` : '');
 
   return (
     <QuizCard
