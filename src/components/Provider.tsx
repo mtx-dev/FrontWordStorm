@@ -50,7 +50,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
       callback();
     } catch (error: any) {
       console.log(error.response?.data?.message);
-      triggerError(error);
+      triggerError(error.response?.data ? error.response?.data : error);
     }
   };
 
@@ -68,7 +68,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
       callback();
     } catch (error: any) {
       console.log(error.response?.data?.message);
-      triggerError(error);
+      triggerError(error.response?.data ? error.response?.data : error);
     }
   };
 
@@ -83,7 +83,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
       callback();
     } catch (error: any) {
       console.log(error.response?.data?.message);
-      triggerError(error);
+      triggerError(error.response?.data ? error.response?.data : error);
     }
   };
 
@@ -112,7 +112,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
       setVocabulary(sortVocabulary(response.data));
     } catch (error: any) {
       console.log(error.response?.data?.message);
-      triggerError(error);
+      triggerError(error.response?.data ? error.response?.data : error);
     }
   };
 
@@ -124,7 +124,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
       setVocabulary(newVocabulary);
     } catch (error: any) {
       console.log(error.response?.data?.message);
-      triggerError(error);
+      triggerError(error.response?.data ? error.response?.data : error);
     }
   };
 
@@ -138,7 +138,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
       setVocabulary(newVocabulary);
     } catch (error: any) {
       console.log(error.response?.data?.message);
-      triggerError(error);
+      triggerError(error.response?.data ? error.response?.data : error);
     }
   };
 
