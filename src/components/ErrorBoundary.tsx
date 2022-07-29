@@ -25,7 +25,6 @@ export default class ErrorBoundary extends React.Component<Props, State> {
     console.log({ error, errorInfo });
   }
   triggerError: ErrorContextType['triggerError'] = (error) => {
-    console.log('triggerError', typeof error);
     this.setState({ hasError: true, error });
   };
   resetError = () => this.setState({ hasError: false });
