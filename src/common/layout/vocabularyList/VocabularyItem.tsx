@@ -6,6 +6,7 @@ import {
   Reception1,
   Reception2,
   Reception3,
+  Reception4,
   CheckLg,
 } from 'react-bootstrap-icons';
 
@@ -14,6 +15,7 @@ const levels = [
   <Reception1 key={1} color="royalblue" size={32} />,
   <Reception2 key={2} color="royalblue" size={32} />,
   <Reception3 key={3} color="royalblue" size={32} />,
+  <Reception4 key={4} color="royalblue" size={32} />,
 ];
 
 export default function VocabularyItem({
