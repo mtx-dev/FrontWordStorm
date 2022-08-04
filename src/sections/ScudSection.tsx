@@ -65,6 +65,7 @@ export default function ScudSection() {
       }
       if (word.successfulAttempts === 5) {
         word.status = 'learned';
+        word.active = false;
       }
       return {
         id: word.id,
