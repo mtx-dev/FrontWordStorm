@@ -39,7 +39,6 @@ export default function QuizTranslate({
     const target = e.target as HTMLButtonElement;
     const choosen = target.dataset.value;
     if (choosen) {
-      console.log(choosen, pazzleWord.word);
       setChoosenWord(choosen);
       if (isAnswerRight) {
         setIsAnswerRight(pazzleWord.word === choosen);
