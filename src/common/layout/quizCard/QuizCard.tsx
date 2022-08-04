@@ -33,7 +33,7 @@ const QuizCard = ({
             </Row>
           </Card.Header>
           <Card.Body>
-            <Card.Title className="p-2 text-light d-flex justify-content-center pazzle-text">
+            <Card.Title className="p-2 text-light d-flex justify-content-center">
               {pazzle}
             </Card.Title>
             {children}
