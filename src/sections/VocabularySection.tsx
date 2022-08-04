@@ -87,7 +87,7 @@ export default function VocabularySection() {
   useAsyncEffect(async () => {
     if (!search || !isAddMode || !isChoosen) return;
     setIsLoading(true);
-    await addWord(search, translation);
+    await addWord(search.toLocaleLowerCase(), translation);
     setIsLoading(false);
     setIsChoosen(false);
     setTranslation('');

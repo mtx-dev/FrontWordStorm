@@ -128,7 +128,7 @@ export default function QuizListen({
       .toLocaleLowerCase();
     const splitedAnswer = splitByWords(answer);
     const result = splitedPazzle.every(
-      (item, index) => item === splitedAnswer[index],
+      (item, index) => item.toLocaleLowerCase() === splitedAnswer[index],
     );
     setIsAnswerRight(result);
     if (!allowNext) {
@@ -147,7 +147,7 @@ export default function QuizListen({
   return (
     <QuizCard
       title="Listen and write"
-      pazzle={allowNext ? pazzleWord.translation : ''}
+      // pazzle={allowNext ? pazzleWord.translation : ''}
       disabledNext={!allowNext}
       handleNextWord={handleNextWord}
     >

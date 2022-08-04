@@ -18,7 +18,7 @@ export default function QuizSpell({
 
   const [currentRihgtLetterIndex, setCurrentRightLetterIndex] = useState(0);
   const [clickedIndex, setClickedIndex] = useState<number>();
-  const currentWordLetters = pazzleWord.word.split('');
+  const currentWordLetters = pazzleWord.word.toLocaleLowerCase().split('');
   const currentRightLetter = currentWordLetters[currentRihgtLetterIndex];
 
   useEffect(() => {
