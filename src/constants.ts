@@ -7,7 +7,7 @@ export const maxQuizWords = 6;
 export const limits: Record<number, number> = {
   0: 0,
   1: 2,
-  2: 1,
+  2: 2,
   3: 1,
   4: 1,
 };
