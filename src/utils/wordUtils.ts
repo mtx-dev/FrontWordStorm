@@ -33,12 +33,15 @@ export function filterToStudy(vocabulary: IWord[]): IWord[] {
           0.2,
       ),
     );
+    // console.log('---', w.word, w.successfulAttempts, daysPassed);
     switch (w.successfulAttempts) {
       case 1:
         return daysPassed >= 1;
       case 2:
-        return daysPassed >= 6;
+        return daysPassed >= 5;
       case 3:
+        return daysPassed >= 15;
+      case 4:
         return daysPassed >= 25;
       default:
         return false;
@@ -54,7 +57,7 @@ export function filterToStudy(vocabulary: IWord[]): IWord[] {
     limitedWords.push(w);
     return limitedWords;
   }, []);
-  // console.log('resultWords', resultWords.length);
+  // console.log('resultWords', resultWords);
 
   const additionNewWords = allows
     .filter((w) => w.successfulAttempts === 0)
