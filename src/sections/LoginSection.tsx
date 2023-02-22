@@ -15,8 +15,8 @@ export default function LoginSection() {
   const fromPath = locationState?.from?.pathname || '/';
 
   const loginForm = useRef<HTMLFormElement>(null);
-  const [email, setEmail] = useState('ggg@ggg.com');
-  const [password, setPassword] = useState('12345678');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [allowValidation, setAllowValidation] = useState(false);
   // const [isValidated, setIsValidated] = useState(false);
 
