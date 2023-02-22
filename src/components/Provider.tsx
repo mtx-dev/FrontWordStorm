@@ -21,13 +21,11 @@ export default function Provider({ children }: { children: React.ReactNode }) {
     try {
       // TODO Add error connection
       const response = await AuthService.refresh();
-      console.log('refresh', response);
       localStorage.setItem('token', response.data.accessToken);
       setUser({ ...response.data.user });
       await getVocabulary();
       setIsAuth(true);
     } catch (error: any) {
-      console.log('checkAuth', error.response?.data?.message);
       triggerError(error);
     }
     setIsLoading(false);
@@ -43,13 +41,11 @@ export default function Provider({ children }: { children: React.ReactNode }) {
       // TODO Add error connection
       const response = await AuthService.login(email, password);
       localStorage.setItem('token', response.data.accessToken);
-      console.log('set user', response.data.user);
       setUser({ ...response.data.user });
       await getVocabulary();
       setIsAuth(true);
       callback();
     } catch (error: any) {
-      console.log(error.response?.data?.message);
       triggerError(error.response?.data ? error.response?.data : error);
     }
   };
@@ -67,7 +63,6 @@ export default function Provider({ children }: { children: React.ReactNode }) {
       setUser(response.data.user);
       callback();
     } catch (error: any) {
-      console.log(error.response?.data?.message);
       triggerError(error.response?.data ? error.response?.data : error);
     }
   };
@@ -82,7 +77,6 @@ export default function Provider({ children }: { children: React.ReactNode }) {
       setVocabulary([]);
       callback();
     } catch (error: any) {
-      console.log(error.response?.data?.message);
       triggerError(error.response?.data ? error.response?.data : error);
     }
   };
@@ -92,8 +86,7 @@ export default function Provider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const saveStatistic = async (wordsStatistic: Partial<IWord>[]) => {
-    const r = await VocabularyServoce.updateWords(wordsStatistic);
-    console.log(r);
+    await VocabularyServoce.updateWords(wordsStatistic);
   };
   // TODO move to utils
   const sortVocabulary = (voc: IWord[]) => {
@@ -108,10 +101,8 @@ export default function Provider({ children }: { children: React.ReactNode }) {
   const getVocabulary = async () => {
     try {
       const response = await VocabularyServoce.getVocabulary();
-      console.log('Get voc', response.data);
       setVocabulary(sortVocabulary(response.data));
     } catch (error: any) {
-      console.log(error.response?.data?.message);
       triggerError(error.response?.data ? error.response?.data : error);
     }
   };
@@ -119,11 +110,9 @@ export default function Provider({ children }: { children: React.ReactNode }) {
   const addWord = async (word: string, translation: string) => {
     try {
       const response = await VocabularyServoce.addWord(word, translation);
-      console.log('new', response.data);
       const newVocabulary = [...vocabulary, response.data];
       setVocabulary(newVocabulary);
     } catch (error: any) {
-      console.log(error.response?.data?.message);
       triggerError(error.response?.data ? error.response?.data : error);
     }
   };
@@ -137,7 +126,6 @@ export default function Provider({ children }: { children: React.ReactNode }) {
 
       setVocabulary(newVocabulary);
     } catch (error: any) {
-      console.log(error.response?.data?.message);
       triggerError(error.response?.data ? error.response?.data : error);
     }
   };
@@ -146,7 +134,6 @@ export default function Provider({ children }: { children: React.ReactNode }) {
     if (!user) return;
     const updateUser = { ...user };
     updateUser.settings.voice = voiceIndex;
-    console.log('set voiceIndex', voiceIndex);
     setUser(updateUser);
   };
 
