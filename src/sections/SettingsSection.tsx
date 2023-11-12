@@ -32,10 +32,10 @@ export default function SettingsSection() {
     setCurrentVoice(e.target.value);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const newSettings = { ...settings };
     newSettings.voice = currentVoice;
-    saveSettings(newSettings);
+    await saveSettings(newSettings);
   };
 
   return (
