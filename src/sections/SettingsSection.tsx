@@ -39,7 +39,7 @@ export default function SettingsSection() {
   };
 
   return (
-    <Row className="justify-content-center">
+    <Row className="justify-content-center m-0">
       <Col xs={10} sm={8} md={6}>
         <h2 className="mt-4">Settings</h2>
         <Form className="mt-4">
